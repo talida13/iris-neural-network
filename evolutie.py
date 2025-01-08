@@ -1,4 +1,5 @@
 from ucimlrepo import fetch_ucirepo 
+import numpy as np
 
 # incarcarea datelor
 iris = fetch_ucirepo(id=53) 
@@ -14,14 +15,23 @@ X_min = X.min(axis=0)
 X_max = X.max(axis=0)
 
 X_normalized = (X - X_min) / (X_max - X_min)
-
 print("Date normalizate:")
 print(X_normalized)
 
+X_normalized = X_normalized.values 
+y = y.values
+
+indices = np.arange(len(X_normalized))
+np.random.seed(42) 
+np.random.shuffle(indices)
+X_shuffled = X_normalized[indices]
+y_shuffled = y[indices]
+
+
 #impartirea datelor in set de antrenare si testare
-train_size = int(0.8 * len(X_normalized))
-X_train, X_test = X_normalized[:train_size], X_normalized[train_size:]
-y_train, y_test = y[:train_size], y[train_size:]
+train_size = int(0.8 * len(X_shuffled))
+X_train, X_test = X_shuffled[:train_size], X_shuffled[train_size:]
+y_train, y_test = y_shuffled[:train_size], y_shuffled[train_size:]
 
 print("Impartirea datelor:")
 print(X_train)
