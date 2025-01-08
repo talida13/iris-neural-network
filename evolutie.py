@@ -1,20 +1,21 @@
 from ucimlrepo import fetch_ucirepo 
 import random
-  
 
+# fetch dataset
 iris = fetch_ucirepo(id=53) 
-  
 
+# data (as pandas dataframes) 
 X = iris.data.features 
 y = iris.data.targets 
-  
 
-#print(iris.metadata) 
+# metadata   
+# print(iris.metadata) 
 
-#print(iris.variables) 
+# variable information 
+# print(iris.variables) 
+
 print(X)
 print(y)
-
 
 class Selection:
     @staticmethod
