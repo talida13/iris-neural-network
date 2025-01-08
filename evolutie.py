@@ -6,8 +6,8 @@ iris = fetch_ucirepo(id=53)
 X = iris.data.features 
 y = iris.data.targets 
   
-print(X)
-print(y)
+# print(X)
+# print(y)
 
 # normalizarea datelor
 X_min = X.min(axis=0)
@@ -19,6 +19,12 @@ print("Date normalizate:")
 print(X_normalized)
 
 #impartirea datelor in set de antrenare si testare
-train_size = int(0.8 * len(X))
-X_train, X_test = X[:train_size], X[train_size:]
+train_size = int(0.8 * len(X_normalized))
+X_train, X_test = X_normalized[:train_size], X_normalized[train_size:]
 y_train, y_test = y[:train_size], y[train_size:]
+
+print("Impartirea datelor:")
+print(X_train)
+print(X_test)
+print(y_train)
+print(y_test)
