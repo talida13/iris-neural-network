@@ -1,23 +1,41 @@
 from ucimlrepo import fetch_ucirepo 
 import numpy as np
+from retea_neuronala import ReteaNeuronala
 
-# reteaua neuronala
-neuroni_intrare = 4  # numarul de caracteristici din setul Iris (sepal length, sepal width, petal length, petal width)
-neuroni_strat_ascuns = 5  # numarul de neuroni din stratul ascuns
-neuroni_iesire = 3  # numarul de clase din setul Iris (setosa, versicolor, virginica)
+# initializare retea neuronala
+retea: ReteaNeuronala = ReteaNeuronala(neuroni_intrare=4, neuroni_strat_ascuns=5, neuroni_iesire=3)
+#print(retea.dimensiune_cromozom)
 
-nr_ponderi_ascuns = neuroni_intrare * neuroni_strat_ascuns
-nr_praguri_ascuns = neuroni_strat_ascuns
-nr_ponderi_iesire = neuroni_strat_ascuns * neuroni_iesire
-nr_praguri_iesire = neuroni_iesire
-
-dimensiune_cromozom = nr_ponderi_ascuns + nr_praguri_ascuns + nr_ponderi_iesire + nr_praguri_iesire
-
-#initizalizarea populatiei cu valori aleatoare
+# initizalizarea populatiei cu valori aleatoare
 def initialize_populatie(dimensiune_populatie, dimensiune_cromozom):
     return [np.random.uniform(-1, 1, dimensiune_cromozom) for _ in range(dimensiune_populatie)]
 
+# populatie de 2 cromozomi doar pentru testarea functiilor de decodificare, mutatie, incrucisare. 
+#test_cromozomi: np.array = initialize_populatie(2, retea.dimensiune_cromozom)
+
 # decodificare cromozom
+def decodificare_cromozom(cromozom: np.array, retea: ReteaNeuronala):
+    ponderi_ascuns = cromozom[:retea.nr_ponderi_ascuns].reshape((retea.neuroni_intrare, retea.neuroni_strat_ascuns))
+    
+    praguri_ascuns = cromozom[retea.nr_ponderi_ascuns:retea.nr_ponderi_ascuns + retea.nr_praguri_ascuns]
+
+    inceput_iesire = retea.nr_ponderi_ascuns + retea.nr_praguri_ascuns
+
+    ponderi_iesire = cromozom[inceput_iesire:inceput_iesire + retea.nr_ponderi_iesire].reshape((retea.neuroni_strat_ascuns, retea.neuroni_iesire))
+    
+    praguri_iesire = cromozom[inceput_iesire + retea.nr_praguri_iesire:]
+
+    return {
+        "ponderi_ascuns": ponderi_ascuns,
+        "praguri_ascuns": praguri_ascuns,
+        "ponderi_iesire": ponderi_iesire,
+        "praguri_iesire": praguri_iesire
+    }
+
+# apel pentru a testa functionalitatea.
+#decodificare = decodificare_cromozom(test_cromozomi[0], retea)
+#print(decodificare["ponderi_ascuns"])
+#print(decodificare)
 
 
 # functia de propagare inainte
@@ -30,12 +48,24 @@ def initialize_populatie(dimensiune_populatie, dimensiune_cromozom):
 
 
 # incrucisarea
+def incrucisare(parinte1, parinte2):
+    punct = np.random.randint(1, len(parinte1) - 1)
+    copil1 = np.concatenate((parinte1[:punct], parinte2[punct:]))
+    copil2 = np.concatenate((parinte2[:punct], parinte1[punct:]))
+    return copil1, copil2
 
-
+# apel de functie pentru testarea functionalitatii.
+#print(incrucisare(test_cromozomi[0], test_cromozomi[1]))
 
 # mutatia
+def mutatie(cromozom, rata_mutatie=0.1):
+    for i in range(len(cromozom)):
+        if np.random.rand() < rata_mutatie:
+            cromozom[i] += np.random.uniform(-0.5, 0.5)
+    return cromozom
 
-
+# apel de functie pentru testarea functionalitatii.
+#print(mutatie(test_cromozomi[0]))
 
 # algoritmul genetic
 
