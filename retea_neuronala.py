@@ -49,15 +49,20 @@ class ReteaNeuronala:
             "ponderi_iesire": ponderi_iesire,
             "praguri_iesire": praguri_iesire
         }
+        
+     # functia sigmoid
+    def sigmoid(x):
+        return 1 / (1 + np.exp(-x))
+        
     # functia de propagare inainte
     def propagare_inainte(self, X, cromozom):
-        return "de facut"
-
-    # Functia sigmoid
-    def sigmoid(self, x):
-        return 1 / (1 + np.exp(-x))
-    
-
+        input_ascuns = np.dot(X, retea['ponderi_ascuns']) + retea['praguri_ascuns']
+        output_ascuns = sigmoida(input_ascuns)
+        
+        input_iesire = np.dot(output_ascuns, retea['ponderi_iesire']) + retea['praguri_iesire']
+        output_iesire = sigmoida(input_iesire)
+        
+        return output_iesire
 
 # apel pentru a testa functionalitatea.
 #decodificare = decodificare_cromozom(test_cromozomi[0], retea)
