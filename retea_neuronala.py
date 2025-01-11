@@ -1,3 +1,4 @@
+import numpy as np
 # iris neural network
 
 """
@@ -30,3 +31,35 @@ class ReteaNeuronala:
         self.nr_praguri_iesire = neuroni_iesire
 
         self.dimensiune_cromozom = self.nr_ponderi_ascuns + self.nr_praguri_ascuns + self.nr_ponderi_iesire + self.nr_praguri_iesire
+        
+    def decodificare_cromozom(self, cromozom):
+        ponderi_ascuns = cromozom[:self.nr_ponderi_ascuns].reshape((self.neuroni_intrare, self.neuroni_strat_ascuns))
+        
+        praguri_ascuns = cromozom[self.nr_ponderi_ascuns:self.nr_ponderi_ascuns + self.nr_praguri_ascuns]
+
+        inceput_iesire = self.nr_ponderi_ascuns + self.nr_praguri_ascuns
+
+        ponderi_iesire = cromozom[inceput_iesire:inceput_iesire + self.nr_ponderi_iesire].reshape((self.neuroni_strat_ascuns, self.neuroni_iesire))
+        
+        praguri_iesire = cromozom[inceput_iesire + self.nr_praguri_iesire:]
+
+        return {
+            "ponderi_ascuns": ponderi_ascuns,
+            "praguri_ascuns": praguri_ascuns,
+            "ponderi_iesire": ponderi_iesire,
+            "praguri_iesire": praguri_iesire
+        }
+    # functia de propagare inainte
+    def propagare_inainte(self, X, cromozom):
+        return "de facut"
+
+    # Functia sigmoid
+    def sigmoid(x):
+        return 1 / (1 + np.exp(-x))
+    
+
+
+# apel pentru a testa functionalitatea.
+#decodificare = decodificare_cromozom(test_cromozomi[0], retea)
+#print(decodificare["ponderi_ascuns"])
+#print(decodificare)
