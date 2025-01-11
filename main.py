@@ -1,5 +1,7 @@
 from retea_neuronala import ReteaNeuronala
 from procesarea_datelor import incarca_si_proceseaza_date
+from evolutie import algoritm_genetic
+
 
 # 1. incarcarea si prelucrarea datelor
 X_train, X_test, y_train, y_test = incarca_si_proceseaza_date()

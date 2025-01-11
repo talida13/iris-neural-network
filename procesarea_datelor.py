@@ -16,7 +16,8 @@ def incarca_si_proceseaza_date():
     X_normalizat = (X - X_min) / (X_max - X_min)
     # trebuie one hot encoding pentru etichete y
     encoder = OneHotEncoder(sparse=False)
-    y_encodat = encoder.fit_transform(y.reshape(-1, 1))
+    y_encodat = encoder.fit_transform(y.values.reshape(-1, 1))
+
 
     # amestecarea datelor
     indici = np.arange(len(X_normalizat))
@@ -25,6 +26,7 @@ def incarca_si_proceseaza_date():
 
     X_amestecat = X_normalizat.iloc[indici] 
     y_amestecat = y_encodat.iloc[indici] 
+    
 
     #impartirea datelor in set de antrenare si testare
     dimensiune_antrenare = int(0.8 * len(X_amestecat))
