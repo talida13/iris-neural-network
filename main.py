@@ -11,7 +11,7 @@ X_train, X_test, y_train, y_test = incarca_si_proceseaza_date()
 retea: ReteaNeuronala = ReteaNeuronala(neuroni_intrare=4, neuroni_strat_ascuns=10, neuroni_iesire=3)
 
 # 3. rularea algoritmului evolutiv
-dimensiune_populatie =3
+dimensiune_populatie = 50
 generatii = 1000
 rata_mutatie = 0.05
 

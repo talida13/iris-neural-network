@@ -61,3 +61,19 @@ def algoritm_genetic(retea, X_train, y_train, dimensiune_populatie=50, generatii
     return populatie[np.argmax(fitness_rezultate)] 
 
 
+def algoritm_genetic(retea, X_train, y_train, dimensiune_populatie=50, generatii=100, rata_mutatie=0.1):
+    fitness_rezultate = []
+    populatie = initializarea_populatiei(dimensiune_populatie, retea.dimensiune_cromozom)
+
+    for generatie in range(generatii):
+        fitness_rezultate = [fitness(cromozom, retea, X_train, y_train) for cromozom in populatie]
+        noua_populatie = []
+        for _ in range(dimensiune_populatie // 2):
+            parinte1, parinte2 = selectie_parinti(populatie, fitness_rezultate)
+            copil1, copil2 = incrucisare(parinte1, parinte2)
+            copil1 = mutatie(copil1, rata_mutatie)
+            copil2 = mutatie(copil2, rata_mutatie)
+            noua_populatie.append(copil1)
+            noua_populatie.append(copil2)
+        populatie = noua_populatie
+    return populatie[np.argmax(fitness_rezultate)]
