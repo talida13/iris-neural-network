@@ -6,7 +6,7 @@ INFORMATII RETEA NEURONALA
 
 -->
 neuroni_intrare = 4  # numarul de caracteristici din setul Iris (sepal length, sepal width, petal length, petal width)
-neuroni_strat_ascuns = 5  # numarul de neuroni din stratul ascuns
+neuroni_strat_ascuns = 10  # numarul de neuroni din stratul ascuns
 neuroni_iesire = 3  # numarul de clase din setul Iris (setosa, versicolor, virginica)
 
 nr_ponderi_ascuns = neuroni_intrare * neuroni_strat_ascuns

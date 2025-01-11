@@ -56,7 +56,7 @@ def algoritm_genetic(retea, X_train, y_train, dimensiune_populatie=50, generatii
             noua_populatie.append(copil1)
             noua_populatie.append(copil2)
             populatie = noua_populatie
-    return populatie[np.argmax(fitness_rezultate)] , populatie
+    return populatie[np.argmax(fitness_rezultate)] 
 
 
 #########   TESTARE FUNCTII  #########
