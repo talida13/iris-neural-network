@@ -1,4 +1,5 @@
 import numpy as np
+from retea_neuronala import *
 
 
 # initizalizarea populatiei cu valori aleatoare
@@ -7,7 +8,9 @@ def initialize_populatie(dimensiune_populatie, dimensiune_cromozom):
 
 # functia de fitness
 def fitness(cromozom, retea, X_train, y_train):
-    return "De facut"
+    predictii = retea.propagare_inainte(X_train, cromozom)
+    eroare = np.mean((y_train - predictii) ** 2)
+    return -eroare
 
 # selectia parintilor
 def selectie_parinti(populatie, fitnessuri):

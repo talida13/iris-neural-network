@@ -54,7 +54,7 @@ class ReteaNeuronala:
         return "de facut"
 
     # Functia sigmoid
-    def sigmoid(x):
+    def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
     
 
