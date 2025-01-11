@@ -12,6 +12,8 @@ def fitness(cromozom, retea, X_train, y_train):
     eroare = np.mean((y_train - predictii) ** 2)
     return -eroare
 
+
+
 # selectia parintilor
 def selectie_parinti(populatie, fitnessuri, k=2):
     parinti = []
@@ -59,4 +61,3 @@ def algoritm_genetic(retea, X_train, y_train, dimensiune_populatie=50, generatii
     return populatie[np.argmax(fitness_rezultate)] 
 
 
-#########   TESTARE FUNCTII  #########

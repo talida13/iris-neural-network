@@ -53,6 +53,7 @@ class ReteaNeuronala:
      # functia sigmoid
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
+    
         
     # functia de propagare inainte
     def propagare_inainte(self, X, cromozom):
@@ -64,3 +65,8 @@ class ReteaNeuronala:
         output_iesire = self.sigmoid(input_iesire)
         
         return output_iesire
+    
+    
+    
+
+    

@@ -6,13 +6,14 @@ import numpy as np
 # 1. incarcarea si prelucrarea datelor
 X_train, X_test, y_train, y_test = incarca_si_proceseaza_date()
 
+
 # 2. initializare retea neuronala
-retea: ReteaNeuronala = ReteaNeuronala(neuroni_intrare=4, neuroni_strat_ascuns=5, neuroni_iesire=3)
+retea: ReteaNeuronala = ReteaNeuronala(neuroni_intrare=4, neuroni_strat_ascuns=10, neuroni_iesire=3)
 
 # 3. rularea algoritmului evolutiv
-dimensiune_populatie = 100
+dimensiune_populatie =3
 generatii = 1000
-rata_mutatie = 0.1
+rata_mutatie = 0.05
 
 cel_mai_bun_cromozom= algoritm_genetic(
     retea=retea,
@@ -46,10 +47,11 @@ print("Acuratețea pe setul de antrenare:", acuratete_train)
 print("Acuratețea pe setul de test:", acuratete_test)
 
 
-
 # Rezultate
 print(f"EROARE TRAIN (MSE): {mse_train}")
 print(f"EROARE TEST (MSE): {mse_test}")
+
+
 
 
 
