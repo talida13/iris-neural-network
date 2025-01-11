@@ -51,16 +51,16 @@ class ReteaNeuronala:
         }
         
      # functia sigmoid
-    def sigmoid(x):
+    def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
         
     # functia de propagare inainte
     def propagare_inainte(self, X, cromozom):
-        input_ascuns = np.dot(X, retea['ponderi_ascuns']) + retea['praguri_ascuns']
-        output_ascuns = sigmoida(input_ascuns)
+        input_ascuns = np.dot(X, self.retea['ponderi_ascuns']) + self.retea['praguri_ascuns']
+        output_ascuns = self.sigmoida(input_ascuns)
         
-        input_iesire = np.dot(output_ascuns, retea['ponderi_iesire']) + retea['praguri_iesire']
-        output_iesire = sigmoida(input_iesire)
+        input_iesire = np.dot(output_ascuns, self.retea['ponderi_iesire']) + self.retea['praguri_iesire']
+        output_iesire = self.sigmoida(input_iesire)
         
         return output_iesire
 
