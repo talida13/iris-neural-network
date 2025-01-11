@@ -1,6 +1,6 @@
 from retea_neuronala import ReteaNeuronala
 from procesarea_datelor import incarca_si_proceseaza_date
-from evolutie import algoritm_genetic
+from evolutie import *
 
 
 # 1. incarcarea si prelucrarea datelor
@@ -12,6 +12,7 @@ retea: ReteaNeuronala = ReteaNeuronala(neuroni_intrare=4, neuroni_strat_ascuns=5
 
 # 3. rularea algoritmului evolutiv
 
+algoritm_genetic(retea, X_train, y_train, dimensiune_populatie=50, generatii=100, rata_mutatie=0.1)
 
 # 4. testarea si afisarea rezultatelor
 
