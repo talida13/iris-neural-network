@@ -25,7 +25,8 @@ def incarca_si_proceseaza_date():
     np.random.shuffle(indici)
 
     X_amestecat = X_normalizat.iloc[indici] 
-    y_amestecat = y_encodat.iloc[indici] 
+    y_amestecat = y_encodat[indici]
+
     
 
     #impartirea datelor in set de antrenare si testare
