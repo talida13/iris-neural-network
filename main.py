@@ -43,13 +43,13 @@ predictii_clase_test = np.argmax(predictii_test, axis=1)
 clase_reale_test = np.argmax(y_test, axis=1)
 acuratete_test = np.mean(predictii_clase_test == clase_reale_test)
 
-print("Acuratețea pe setul de antrenare:", acuratete_train)
-print("Acuratețea pe setul de test:", acuratete_test)
+# print("Acuratețea pe setul de antrenare:", acuratete_train)
+# print("Acuratețea pe setul de test:", acuratete_test)
 
 
-# Rezultate
-print(f"EROARE TRAIN (MSE): {mse_train}")
-print(f"EROARE TEST (MSE): {mse_test}")
+# # Rezultate
+# print(f"EROARE TRAIN (MSE): {mse_train}")
+# print(f"EROARE TEST (MSE): {mse_test}")
 
 
 
@@ -57,18 +57,28 @@ iris_exemplu = np.array([5.1, 3.5, 1.4, 0.2])  # Iris-setosa
 
 # normalizare
 iris_exemplu_normalizat = ((iris_exemplu - X_train.min(axis=0)) / (X_train.max(axis=0) - X_train.min(axis=0))).values
-
 predictie = retea.propagare_inainte(iris_exemplu_normalizat.reshape(1, -1), cel_mai_bun_cromozom)
-
 clasa_predusa = np.argmax(predictie)
 clase = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
 nume_clasa_predusa = clase[clasa_predusa]
 
-print(f"Iris : {iris_exemplu}")
-print(f"Predictia: {predictie}")
-print(f"Clasa : {nume_clasa_predusa}")
+print(f"Date input: {iris_exemplu}")
+print("probabilitati pentru fiecare clasa:")
+for idx, prob in enumerate(predictie[0]):
+    print(f"  {clase[idx]}: {prob:.2f}")
+print(f"clasa prezisa: {nume_clasa_predusa}")
+
+iris_perturbat = iris_exemplu + np.random.normal(0, 0.05, size=iris_exemplu.shape)
 
 
+iris_exemplu_normalizat = ((iris_perturbat - X_train.min(axis=0)) / (X_train.max(axis=0) - X_train.min(axis=0))).values
+predictie = retea.propagare_inainte(iris_exemplu_normalizat.reshape(1, -1), cel_mai_bun_cromozom)
+clasa_predusa = np.argmax(predictie)
+clase = ["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+nume_clasa_predusa = clase[clasa_predusa]
 
-
-
+print(f"Date input perturbate: {iris_perturbat}")
+print("probabilitati pentru fiecare clasa:")
+for idx, prob in enumerate(predictie[0]):
+    print(f"  {clase[idx]}: {prob:.2f}")
+print(f"clasa prezisa: {nume_clasa_predusa}")
